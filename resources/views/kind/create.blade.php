@@ -4,7 +4,7 @@
 @section('content')
     <section class="section">
         <div class="container">
-            <h1>Create kind</h1>
+            <create-kind></create-kind>
         </div>
     </section>
 @endsection
