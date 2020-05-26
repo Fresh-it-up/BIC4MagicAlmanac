@@ -1,12 +1,13 @@
 <template>
     <div>
-        <p>Kind ITEM</p>
+        <p>{{kind.id}}</p>
     </div>
 </template>
 
 <script>
     export default {
-        name: "kinderItem"
+        name: "kinderItem",
+        props: ["kind"]
     }
 </script>
 

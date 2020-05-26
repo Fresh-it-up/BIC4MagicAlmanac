@@ -1,21 +1,20 @@
 <template>
     <div>
-        <h1>Kind of</h1>
-        <div v-for="kind in Kinder">
-            <label>{{Kind.id}}</label>
+        <h1>Kinder</h1>
+        <div v-for="kind in kinder">
+           <kinderItem v-bind:kind="kind" />
         </div>
     </div>
 </template>
 
 <script>
+    import kinderItem from './kinderItem'
     export default {
-        data() {
-            return {
-
-                Kinder: [{id: 1}, {id: 2}]
-
-            }
-        }
+        name: "Kinder",
+        components: {
+            kinderItem
+        },
+        props: ["kinder"]
     }
 </script>
 
