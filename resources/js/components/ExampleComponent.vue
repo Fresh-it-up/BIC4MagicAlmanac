@@ -19,7 +19,9 @@
 
 <script>
     export default {
-        props: ['title'],
+        props: {
+            title: String
+        },
         mounted() {
             console.log('Component mounted.')
         }
