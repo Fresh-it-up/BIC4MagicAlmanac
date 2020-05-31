@@ -3,11 +3,13 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 require('./bootstrap');
 
 import vue from 'vue';
 
 window.Vue = vue;
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,9 +23,8 @@ window.Vue = vue;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('kinds', require('./components/Kinds.vue').default);
+Vue.component('index-kinds', require('./components/Kinds.vue').default);
 Vue.component('create-kind', require('./components/CreateKind.vue').default);
-Vue.component('edit-kind', require('./components/EditKind.vue').default);
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
 
 /**
