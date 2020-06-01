@@ -25,7 +25,6 @@ Vue.component('kinds', require('./components/Kinds.vue').default);
 Vue.component('create-kind', require('./components/CreateKind.vue').default);
 Vue.component('edit-kind', require('./components/EditKind.vue').default);
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
-Vue.component("Kinder", require('./components/kinderIndex.vue').default );
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
