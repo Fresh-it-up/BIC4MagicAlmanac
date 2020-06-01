@@ -54,6 +54,7 @@
         'name': '',
         'description': ''
     });
+    //test
     export default {
         name: "KindItem",
         data() {
