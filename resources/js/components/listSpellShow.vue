@@ -17,17 +17,13 @@
 </template>
 
 <script>
-    import CrudComponent from './components/listKind.vue';
+    import CrudComponent from './components/listSpell.vue';
     export default {
-        name: "listKindshow",
-
+        name: "listSpellShow",
         data() {
             return {
                 cruds: []
             }
-        },
-        components: {
-            CrudComponent
         },
         methods: {
             async create() {
@@ -42,20 +38,23 @@
             async del(id) {
                 // To do
             },
-            Crud: function({ id, color, name}) {
+            Crud: function ({id, color, name})
+            {
                 this.id = id;
                 this.color = color;
                 this.name = name;
             }
+        },
+        components: {
+            CrudComponent
         }
 
 
+    }
 
 
 
 
-
-        }
 </script>
 
 <style scoped>
