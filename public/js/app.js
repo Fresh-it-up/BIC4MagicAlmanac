@@ -2190,7 +2190,8 @@ __webpack_require__.r(__webpack_exports__);
 var form = new Form({
   'name': '',
   'description': ''
-});
+}); //test
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "KindItem",
   data: function data() {
