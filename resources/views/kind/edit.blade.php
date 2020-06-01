@@ -4,7 +4,7 @@
 @section('content')
     <section class="section">
         <div class="container">
-            <edit-kind v-bind:kind="kind"/>
+            <index-kinds></index-kinds>
         </div>
     </section>
 @endsection
