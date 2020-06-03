@@ -4,7 +4,7 @@
 @section('content')
     <section class="section">
         <div class="container">
-            <index-kinds></index-kinds>
+            <index-kinds :kind="{{ $kind }}" ></index-kinds>
         </div>
     </section>
 @endsection

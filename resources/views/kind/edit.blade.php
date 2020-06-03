@@ -4,7 +4,7 @@
 @section('content')
     <section class="section">
         <div class="container">
-            <index-kinds></index-kinds>
+            <create-kind :is-editable="true" :current-kind="{{$kind}}"></create-kind>
         </div>
     </section>
 @endsection

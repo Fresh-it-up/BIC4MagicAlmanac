@@ -1,44 +1,108 @@
 <template>
     <div class="container">
-        <h1 class="h1">Create kind</h1>
-        <form @submit="createKind">
-            <table class="table">
-                <td>Name</td>
-                <td><input class="input" type="text" v-model="name" placeholder="Enter Name"></td>
-                <tr></tr>
-                <td>Description</td>
-                <td><input class="input" type="text" v-model="description" placeholder="Enter Description"></td>
-                <tr></tr>
-                <td></td>
-                <td><input class="button is-link" type="submit" value="Create Kind"></td>
-            </table>
-        </form>
+        <div class="columns is-multiline">
+            <div class="card blog-card column is-half is-offset-one-quarter">
+                <header class="card-header">
+                    <h1 class="card-header-title is-centered" v-text="edit ? form.name : 'New Kind'"/>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        <form @submit.prevent="submit">
+                            <div class="field" >
+                                <label class="label" for="name">Name</label>
+                                <div class="control">
+                                    <input id="name"
+                                           v-model="form.name"
+                                           class="input"
+                                           v-bind:class="{ 'is-danger': form.errors.has('name')}"
+                                           type="text" autofocus>
+                                </div>
+                                <p class="help is-danger" v-if="form.errors.has('name')"
+                                   v-text="form.errors.get('name')"/>
+                            </div>
+
+                            <div class="field">
+                                <label class="label" for="description">Description</label>
+                                <div class="control">
+                                    <textarea id="description" v-model="form.description" class="textarea"></textarea>
+                                </div>
+                                <p class="help is-danger" v-if="form.errors.has('description')"
+                                   v-text="form.errors.get('description')"/>
+                            </div>
+                            <button type="submit" class="button is-large is-primary is-outlined is-fullwidth" v-text="edit ? 'Update' : 'Save'" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    let form = new Form({
+        'category_id': '',
+        'name': '',
+        'description': ''
+    });
     export default {
         name: "CreateKind",
+        props: {
+            isEditable: {
+                required: false,
+                type: Boolean,
+                default: false
+            },
+            currentKind: {
+                required: false,
+                type: Object
+            },
+        },
         data() {
             return {
-                name: '',
-                description: '',
+                edit: undefined,
+                form: form,
+                url: ''
             }
         },
-        methods: {
-            createKind(e){
+        created() {
+            this.edit = this.isEditable;
+            if (this.edit) {
+                this.url = '/kind/' + this.currentKind.slug;
 
-                console.log('Creating Kind')
-                this.form = new Form({
-                    'name': this.name,
-                    'description': this.description})
-                this.form.post('/kind');
+                this.form.kind_id = this.currentKind.id;
+                this.form.name = this.currentKind.name;
+                this.form.description = this.currentKind.description;
 
-                e.preventDefault();
-
-                this.name = '';
-                this.description = '';
+            } else {
+                this.url = '/kind';
             }
+            console.log('Current URl: ' + this.url);
+        },
+        methods: {
+            submit() {
+                console.log(this.edit ? 'editing' : 'creating');
+                if (this.edit){
+                    this.form.put(this.url);
+                    window.location.href = '/kind';
+                }
+                else{
+                    this.form.post(this.url)
+                    .then(response => {
+                        this.url = '/kind/' + response.slug;
+                        console.log(response);
+                        this.form.kind_id = response.kind_id;
+                        this.form.name = response.name;
+                        this.form.description = response.description;
+
+                        this.edit = true;
+
+                        this.form.noReset = ['kind_id', 'name', 'description'];
+
+                        window.history.pushState("", "", this.url);
+                    });
+                    window.location.href = '/kind';
+                }
+            },
         }
     }
 </script>

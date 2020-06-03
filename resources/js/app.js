@@ -25,6 +25,8 @@ window.Vue = vue;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('index-kinds', require('./components/Kinds.vue').default);
 Vue.component('create-kind', require('./components/CreateKind.vue').default);
+Vue.component('list-kinds', require('./components/ListKinds.vue').default);
+Vue.component('kind', require('./components/Kind.vue').default);
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
 
 /**
