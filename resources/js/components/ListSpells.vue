@@ -4,9 +4,9 @@
             <thead>
             <tr class="title is-6">
                 <th>Name</th>
-                <th>Description</th>
-                <th>Description</th>
+                <th>Quote</th>
                 <th>Created</th>
+                <th>Updated</th>
                 <th>Kind-IDs</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -18,7 +18,7 @@
                     <a :href="'/spell/' + spell.slug"
                        :name="spell.name" :description="spell.description" v-text="spell.name"/>
                 </td>
-                <td>{{spell.description}}</td>
+                <td>{{spell.quote}}</td>
                 <td>{{spell.created_at}}</td>
                 <td>{{spell.updated_at}}</td>
                 <td>{{spell.kind_id}}</td>

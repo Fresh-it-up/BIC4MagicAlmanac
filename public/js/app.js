@@ -2064,9 +2064,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var form = new Form({
   'category_id': '',
   'name': '',
+  'quote': '',
   'description': ''
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2096,6 +2108,7 @@ var form = new Form({
       this.url = '/spell/' + this.currentSpell.slug;
       this.form.spell_id = this.currentSpell.id;
       this.form.name = this.currentSpell.name;
+      this.form.quote = this.currentSpell.quote;
       this.form.description = this.currentSpell.description;
     } else {
       this.url = '/spell';
@@ -2118,6 +2131,7 @@ var form = new Form({
           console.log(response);
           _this.form.spell_id = response.spell_id;
           _this.form.name = response.name;
+          _this.form.quote = response.quote;
           _this.form.description = response.description;
           _this.edit = true;
           _this.form.noReset = ['spell_id', 'name', 'description'];
@@ -21185,6 +21199,48 @@ var render = function() {
                   _c("div", { staticClass: "field" }, [
                     _c(
                       "label",
+                      { staticClass: "label", attrs: { for: "quote" } },
+                      [_vm._v("Quote")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.quote,
+                            expression: "form.quote"
+                          }
+                        ],
+                        staticClass: "input",
+                        class: { "is-danger": _vm.form.errors.has("name") },
+                        attrs: { id: "quote", type: "text", autofocus: "" },
+                        domProps: { value: _vm.form.quote },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "quote", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.form.errors.has("name")
+                      ? _c("p", {
+                          staticClass: "help is-danger",
+                          domProps: {
+                            textContent: _vm._s(_vm.form.errors.get("name"))
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field" }, [
+                    _c(
+                      "label",
                       { staticClass: "label", attrs: { for: "description" } },
                       [_vm._v("Description")]
                     ),
@@ -21523,7 +21579,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(spell.description))]),
+            _c("td", [_vm._v(_vm._s(spell.quote))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(spell.created_at))]),
             _vm._v(" "),
@@ -21572,11 +21628,11 @@ var staticRenderFns = [
       _c("tr", { staticClass: "title is-6" }, [
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
+        _c("th", [_vm._v("Quote")]),
         _vm._v(" "),
         _c("th", [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated")]),
         _vm._v(" "),
         _c("th", [_vm._v("Kind-IDs")]),
         _vm._v(" "),

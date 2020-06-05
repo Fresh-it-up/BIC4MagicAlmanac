@@ -20,7 +20,18 @@
                                 <p class="help is-danger" v-if="form.errors.has('name')"
                                    v-text="form.errors.get('name')"/>
                             </div>
-
+                            <div class="field" >
+                                <label class="label" for="quote">Quote</label>
+                                <div class="control">
+                                    <input id="quote"
+                                           v-model="form.quote"
+                                           class="input"
+                                           v-bind:class="{ 'is-danger': form.errors.has('name')}"
+                                           type="text" autofocus>
+                                </div>
+                                <p class="help is-danger" v-if="form.errors.has('name')"
+                                   v-text="form.errors.get('name')"/>
+                            </div>
                             <div class="field">
                                 <label class="label" for="description">Description</label>
                                 <div class="control">
@@ -42,6 +53,7 @@
     let form = new Form({
         'category_id': '',
         'name': '',
+        'quote': '',
         'description': ''
     });
     export default {
@@ -71,6 +83,7 @@
 
                 this.form.spell_id = this.currentSpell.id;
                 this.form.name = this.currentSpell.name;
+                this.form.quote = this.currentSpell.quote;
                 this.form.description = this.currentSpell.description;
 
             } else {
@@ -92,6 +105,7 @@
                             console.log(response);
                             this.form.spell_id = response.spell_id;
                             this.form.name = response.name;
+                            this.form.quote = response.quote;
                             this.form.description = response.description;
 
                             this.edit = true;
