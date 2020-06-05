@@ -19,7 +19,7 @@
                 </td>
                 <td>{{spell.description}}</td>
                 <td>{{spell.created_at}}</td>
-                <td>{{kind.updated_at}}</td>
+                <td>{{spell.updated_at}}</td>
                 <td>
                     <a :href="'/spell/' + spell.slug + '/edit'" class="button is-info is-outlined is-small">Edit</a>
                 </td>

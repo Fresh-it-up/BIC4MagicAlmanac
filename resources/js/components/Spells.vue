@@ -6,7 +6,7 @@
                 <div class="box custom-box" v-if="this.hasSpells">
                     <list-spells :spells="spells"></list-spells>
                 </div>
-                <p v-if="!this.hasSpells">No kinds found</p>
+                <p v-if="!this.hasSpells">No Spells found</p>
             </div>
         </div>
     </div>

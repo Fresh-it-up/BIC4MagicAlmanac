@@ -21120,7 +21120,7 @@ var render = function() {
             _c("h1", {
               staticClass: "card-header-title is-centered",
               domProps: {
-                textContent: _vm._s(_vm.edit ? _vm.form.name : "New Kind")
+                textContent: _vm._s(_vm.edit ? _vm.form.name : "New Spell")
               }
             })
           ]),
@@ -21525,7 +21525,7 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(spell.created_at))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.kind.updated_at))]),
+            _c("td", [_vm._v(_vm._s(spell.updated_at))]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -21669,7 +21669,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        !this.hasSpells ? _c("p", [_vm._v("No kinds found")]) : _vm._e()
+        !this.hasSpells ? _c("p", [_vm._v("No Spells found")]) : _vm._e()
       ])
     ])
   ])
