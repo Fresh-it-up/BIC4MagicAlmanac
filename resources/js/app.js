@@ -28,7 +28,10 @@ Vue.component('create-kind', require('./components/CreateKind.vue').default);
 Vue.component('list-kinds', require('./components/ListKinds.vue').default);
 Vue.component('kind', require('./components/Kind.vue').default);
 Vue.component('query-message', require('./components/base/QueryMessage.vue').default);
-
+Vue.component('index-spells', require('./components/Spells.vue').default);
+Vue.component('create-spell', require('./components/CreateSpell.vue').default);
+Vue.component('list-spells', require('./components/ListSpells.vue').default);
+Vue.component('spell', require('./components/Spell.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
