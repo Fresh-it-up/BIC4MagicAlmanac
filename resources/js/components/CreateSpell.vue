@@ -32,6 +32,20 @@
                                 <p class="help is-danger" v-if="form.errors.has('name')"
                                    v-text="form.errors.get('name')"/>
                             </div>
+
+                            <div class="field" >
+                                <label class="label" for="kind_id">Kind ID</label>
+                                <div class="control">
+                                    <input id="kind_id"
+                                           v-model="form.kind_id"
+                                           class="input"
+                                           v-bind:class="{ 'is-danger': form.errors.has('name')}"
+                                           type="text" autofocus>
+                                </div>
+                                <p class="help is-danger" v-if="form.errors.has('name')"
+                                   v-text="form.errors.get('name')"/>
+                            </div>
+
                             <div class="field">
                                 <label class="label" for="description">Description</label>
                                 <div class="control">
@@ -51,9 +65,10 @@
 
 <script>
     let form = new Form({
-        'category_id': '',
+        'id': '',
         'name': '',
         'quote': '',
+        'kind_id': '',
         'description': ''
     });
     export default {
@@ -83,6 +98,7 @@
 
                 this.form.spell_id = this.currentSpell.id;
                 this.form.name = this.currentSpell.name;
+                this.form.kind_id = this.currentSpell.kind_id;
                 this.form.quote = this.currentSpell.quote;
                 this.form.description = this.currentSpell.description;
 
@@ -105,6 +121,7 @@
                             console.log(response);
                             this.form.spell_id = response.spell_id;
                             this.form.name = response.name;
+                            this.form.kind_id = response.kind_id;
                             this.form.quote = response.quote;
                             this.form.description = response.description;
 

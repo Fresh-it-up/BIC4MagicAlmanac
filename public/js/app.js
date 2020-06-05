@@ -2075,10 +2075,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var form = new Form({
-  'category_id': '',
+  'id': '',
   'name': '',
   'quote': '',
+  'kind_id': '',
   'description': ''
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2108,6 +2123,7 @@ var form = new Form({
       this.url = '/spell/' + this.currentSpell.slug;
       this.form.spell_id = this.currentSpell.id;
       this.form.name = this.currentSpell.name;
+      this.form.kind_id = this.currentSpell.kind_id;
       this.form.quote = this.currentSpell.quote;
       this.form.description = this.currentSpell.description;
     } else {
@@ -2131,6 +2147,7 @@ var form = new Form({
           console.log(response);
           _this.form.spell_id = response.spell_id;
           _this.form.name = response.name;
+          _this.form.kind_id = response.kind_id;
           _this.form.quote = response.quote;
           _this.form.description = response.description;
           _this.edit = true;
@@ -21223,6 +21240,48 @@ var render = function() {
                               return
                             }
                             _vm.$set(_vm.form, "quote", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm.form.errors.has("name")
+                      ? _c("p", {
+                          staticClass: "help is-danger",
+                          domProps: {
+                            textContent: _vm._s(_vm.form.errors.get("name"))
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "field" }, [
+                    _c(
+                      "label",
+                      { staticClass: "label", attrs: { for: "kind_id" } },
+                      [_vm._v("Kind ID")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "control" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.kind_id,
+                            expression: "form.kind_id"
+                          }
+                        ],
+                        staticClass: "input",
+                        class: { "is-danger": _vm.form.errors.has("name") },
+                        attrs: { id: "kind_id", type: "text", autofocus: "" },
+                        domProps: { value: _vm.form.kind_id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "kind_id", $event.target.value)
                           }
                         }
                       })
