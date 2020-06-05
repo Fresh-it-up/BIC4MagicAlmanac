@@ -2151,7 +2151,7 @@ var form = new Form({
           _this.form.quote = response.quote;
           _this.form.description = response.description;
           _this.edit = true;
-          _this.form.noReset = ['spell_id', 'name', 'description'];
+          _this.form.noReset = ['spell_id', 'name', 'description', 'kind_id', 'quote'];
           window.history.pushState("", "", _this.url);
         });
         window.location.href = '/spell';
@@ -2423,6 +2423,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 var form = new Form({
   'name': '',
+  'quote': '',
+  'kind_id': '',
   'description': ''
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -21231,7 +21233,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "input",
-                        class: { "is-danger": _vm.form.errors.has("name") },
+                        class: { "is-danger": _vm.form.errors.has("quote") },
                         attrs: { id: "quote", type: "text", autofocus: "" },
                         domProps: { value: _vm.form.quote },
                         on: {
@@ -21245,7 +21247,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _vm.form.errors.has("name")
+                    _vm.form.errors.has("quote")
                       ? _c("p", {
                           staticClass: "help is-danger",
                           domProps: {
@@ -21273,7 +21275,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "input",
-                        class: { "is-danger": _vm.form.errors.has("name") },
+                        class: { "is-danger": _vm.form.errors.has("kind_id") },
                         attrs: { id: "kind_id", type: "text", autofocus: "" },
                         domProps: { value: _vm.form.kind_id },
                         on: {
@@ -21287,7 +21289,7 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _vm.form.errors.has("name")
+                    _vm.form.errors.has("kind_id")
                       ? _c("p", {
                           staticClass: "help is-danger",
                           domProps: {
@@ -21632,7 +21634,10 @@ var render = function() {
                 attrs: {
                   href: "/spell/" + spell.slug,
                   name: spell.name,
-                  description: spell.description
+                  description: spell.description,
+                  quote: spell.quote,
+                  kind_id: spell.kind_id,
+                  spell_id: spell.id
                 },
                 domProps: { textContent: _vm._s(spell.name) }
               })

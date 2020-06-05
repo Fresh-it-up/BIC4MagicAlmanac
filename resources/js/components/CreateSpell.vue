@@ -26,10 +26,10 @@
                                     <input id="quote"
                                            v-model="form.quote"
                                            class="input"
-                                           v-bind:class="{ 'is-danger': form.errors.has('name')}"
+                                           v-bind:class="{ 'is-danger': form.errors.has('quote')}"
                                            type="text" autofocus>
                                 </div>
-                                <p class="help is-danger" v-if="form.errors.has('name')"
+                                <p class="help is-danger" v-if="form.errors.has('quote')"
                                    v-text="form.errors.get('name')"/>
                             </div>
 
@@ -39,10 +39,10 @@
                                     <input id="kind_id"
                                            v-model="form.kind_id"
                                            class="input"
-                                           v-bind:class="{ 'is-danger': form.errors.has('name')}"
+                                           v-bind:class="{ 'is-danger': form.errors.has('kind_id')}"
                                            type="text" autofocus>
                                 </div>
-                                <p class="help is-danger" v-if="form.errors.has('name')"
+                                <p class="help is-danger" v-if="form.errors.has('kind_id')"
                                    v-text="form.errors.get('name')"/>
                             </div>
 
@@ -127,7 +127,7 @@
 
                             this.edit = true;
 
-                            this.form.noReset = ['spell_id', 'name', 'description'];
+                            this.form.noReset = ['spell_id', 'name', 'description', 'kind_id', 'quote'];
 
                             window.history.pushState("", "", this.url);
                         });
