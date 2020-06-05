@@ -7,6 +7,7 @@
                 <th>Description</th>
                 <th>Description</th>
                 <th>Created</th>
+                <th>Kind-IDs</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -20,6 +21,7 @@
                 <td>{{spell.description}}</td>
                 <td>{{spell.created_at}}</td>
                 <td>{{spell.updated_at}}</td>
+                <td>{{spell.kind_id}}</td>
                 <td>
                     <a :href="'/spell/' + spell.slug + '/edit'" class="button is-info is-outlined is-small">Edit</a>
                 </td>
@@ -40,7 +42,7 @@
     export default {
         name: "ListSpells",
         props: {
-            kinds: {
+            spells: {
                 required: true
             }
         },

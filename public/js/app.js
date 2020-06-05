@@ -2388,6 +2388,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var form = new Form({
   'name': '',
   'description': ''
@@ -2395,7 +2397,7 @@ var form = new Form({
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ListSpells",
   props: {
-    kinds: {
+    spells: {
       required: true
     }
   },
@@ -21527,6 +21529,8 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(spell.updated_at))]),
             _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(spell.kind_id))]),
+            _vm._v(" "),
             _c("td", [
               _c(
                 "a",
@@ -21573,6 +21577,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Description")]),
         _vm._v(" "),
         _c("th", [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Kind-IDs")]),
         _vm._v(" "),
         _c("th", [_vm._v("Edit")]),
         _vm._v(" "),
@@ -21656,7 +21662,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("h1", [_vm._v("Kinds")]),
+    _c("h1", [_vm._v("Spells")]),
     _vm._v(" "),
     _c("div", { staticClass: "columns is-multiline" }, [
       _c("div", { staticClass: "column is-three-fifths is-offset-one-fifth" }, [
