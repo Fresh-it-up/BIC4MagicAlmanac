@@ -50,6 +50,7 @@
                 if(confirm('Are you sure?')){
                     console.log('deleting ' + kind.slug);
                     form.delete(`/kind/${kind.slug}`);
+                    window.location.href = '/kind';
                 }
             }
         }
