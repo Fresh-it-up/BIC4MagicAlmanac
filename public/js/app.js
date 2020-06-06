@@ -2121,7 +2121,7 @@ var form = new Form({
 
     if (this.edit) {
       this.url = '/spell/' + this.currentSpell.slug;
-      this.form.spell_id = this.currentSpell.id;
+      this.form.id = this.currentSpell.id;
       this.form.name = this.currentSpell.name;
       this.form.kind_id = this.currentSpell.kind_id;
       this.form.quote = this.currentSpell.quote;
@@ -2145,13 +2145,13 @@ var form = new Form({
         this.form.post(this.url).then(function (response) {
           _this.url = '/spell/' + response.slug;
           console.log(response);
-          _this.form.spell_id = response.spell_id;
+          _this.form.id = response.spell_id;
           _this.form.name = response.name;
           _this.form.kind_id = response.kind_id;
           _this.form.quote = response.quote;
           _this.form.description = response.description;
           _this.edit = true;
-          _this.form.noReset = ['spell_id', 'name', 'description', 'kind_id', 'quote'];
+          _this.form.noReset = ['id', 'name', 'description', 'kind_id', 'quote'];
           window.history.pushState("", "", _this.url);
         });
         window.location.href = '/spell';
@@ -35013,6 +35013,7 @@ var Form = /*#__PURE__*/function () {
       var _this = this;
 
       this.submitting = true;
+      console.log(this.data());
       return new Promise(function (resolve, reject) {
         axios[requestType](url, _this.data()).then(function (response) {
           _this.onSuccess(response.data);

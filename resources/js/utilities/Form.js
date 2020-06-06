@@ -56,7 +56,7 @@ class Form {
 
     submit(requestType, url) {
         this.submitting = true;
-
+        console.log(this.data());
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
                 .then(response => {

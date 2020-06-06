@@ -95,8 +95,8 @@
             this.edit = this.isEditable;
             if (this.edit) {
                 this.url = '/spell/' + this.currentSpell.slug;
-                
-                this.form.spell_id = this.currentSpell.id;
+
+                this.form.id = this.currentSpell.id;
                 this.form.name = this.currentSpell.name;
                 this.form.kind_id = this.currentSpell.kind_id;
                 this.form.quote = this.currentSpell.quote;
@@ -120,7 +120,7 @@
                             this.url = '/spell/' + response.slug;
                             console.log(response);
 
-                            this.form.spell_id = response.spell_id;
+                            this.form.id = response.spell_id;
                             this.form.name = response.name;
                             this.form.kind_id = response.kind_id;
                             this.form.quote = response.quote;
@@ -128,7 +128,7 @@
 
                             this.edit = true;
 
-                            this.form.noReset = ['spell_id', 'name', 'description', 'kind_id', 'quote'];
+                            this.form.noReset = ['id', 'name', 'description', 'kind_id', 'quote'];
 
                             window.history.pushState("", "", this.url);
                         });
