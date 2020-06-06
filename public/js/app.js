@@ -1978,7 +1978,7 @@ var form = new Form({
 
     if (this.edit) {
       this.url = '/kind/' + this.currentKind.slug;
-      this.form.kind_id = this.currentKind.id;
+      this.form.id = this.currentKind.id;
       this.form.name = this.currentKind.name;
       this.form.description = this.currentKind.description;
     } else {
@@ -2000,7 +2000,7 @@ var form = new Form({
         this.form.post(this.url).then(function (response) {
           _this.url = '/kind/' + response.slug;
           console.log(response);
-          _this.form.kind_id = response.kind_id;
+          _this.form.id = response.kind_id;
           _this.form.name = response.name;
           _this.form.description = response.description;
           _this.edit = true;
@@ -2024,6 +2024,16 @@ var form = new Form({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2113,24 +2123,28 @@ var form = new Form({
     return {
       edit: undefined,
       form: form,
-      url: ''
+      url: '',
+      selectedKind: '',
+      kinds: [],
+      isDropdownActive: false
     };
   },
   created: function created() {
     this.edit = this.isEditable;
+    this.fetchKinds();
+    console.log('Current URl: ' + this.url);
 
     if (this.edit) {
       this.url = '/spell/' + this.currentSpell.slug;
-      this.form.spell_id = this.currentSpell.id;
+      this.form.id = this.currentSpell.id;
       this.form.name = this.currentSpell.name;
       this.form.kind_id = this.currentSpell.kind_id;
       this.form.quote = this.currentSpell.quote;
       this.form.description = this.currentSpell.description;
     } else {
       this.url = '/spell';
+      this.selectedKind = null;
     }
-
-    console.log('Current URl: ' + this.url);
   },
   methods: {
     submit: function submit() {
@@ -2144,18 +2158,50 @@ var form = new Form({
       } else {
         this.form.post(this.url).then(function (response) {
           _this.url = '/spell/' + response.slug;
-          console.log(response);
-          _this.form.spell_id = response.spell_id;
+          _this.form.id = response.id;
           _this.form.name = response.name;
           _this.form.kind_id = response.kind_id;
           _this.form.quote = response.quote;
           _this.form.description = response.description;
           _this.edit = true;
-          _this.form.noReset = ['spell_id', 'name', 'description', 'kind_id', 'quote'];
+          _this.form.noReset = ['id', 'name', 'description', 'kind_id', 'quote'];
           window.history.pushState("", "", _this.url);
         });
         window.location.href = '/spell';
       }
+    },
+    dropOnChange: function dropOnChange(kindID, kindName) {
+      console.log("Incoming: " + kindID);
+      console.log("Form: " + this.form.kind_id);
+      this.form.kind_id = kindID;
+      console.log("Form AFTER: " + this.form.kind_id);
+      document.getElementById("selectedOne").innerText = kindName;
+    },
+    fetchKinds: function fetchKinds(uri) {
+      var _this2 = this;
+
+      uri = uri || '/list/kind';
+      console.log("fetching " + uri);
+      fetch(uri).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        console.log("response: " + res);
+        _this2.kinds = res;
+
+        if (_this2.edit) {
+          _this2.setKindname();
+        }
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    setKindname: function setKindname() {
+      var _this3 = this;
+
+      var knd = this.kinds.filter(function (kind) {
+        return parseInt(kind.id) === parseInt(_this3.currentSpell.kind_id);
+      });
+      this.selectedKind = knd[0];
     }
   }
 });
@@ -2421,6 +2467,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var form = new Form({
   'name': '',
   'quote': '',
@@ -2434,6 +2482,14 @@ var form = new Form({
       required: true
     }
   },
+  data: function data() {
+    return {
+      kinds: []
+    };
+  },
+  created: function created() {
+    this.fetchKinds();
+  },
   methods: {
     deleteSpell: function deleteSpell(spell) {
       spell = spell || this.spell;
@@ -2441,7 +2497,29 @@ var form = new Form({
       if (confirm('Are you sure?')) {
         console.log('deleting ' + spell.slug);
         form["delete"]("/spell/".concat(spell.slug));
+        window.location.href = '/spell';
       }
+    },
+    fetchKinds: function fetchKinds(uri) {
+      var _this = this;
+
+      uri = uri || '/list/kind';
+      console.log("fetching " + uri);
+      fetch(uri).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        console.log("response: " + res);
+        _this.kinds = res;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getKind: function getKind(kindID) {
+      if (this.kinds.length <= 0) return kindID;
+      var knd = this.kinds.filter(function (kind) {
+        return parseInt(kind.id) === parseInt(kindID);
+      });
+      return knd[0];
     }
   }
 });
@@ -21260,43 +21338,95 @@ var render = function() {
                   _c("div", { staticClass: "field" }, [
                     _c(
                       "label",
-                      { staticClass: "label", attrs: { for: "kind_id" } },
-                      [_vm._v("Kind ID")]
+                      { staticClass: "label", attrs: { for: "dropdown-menu" } },
+                      [_vm._v("Kind")]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "control" }, [
-                      _c("input", {
-                        directives: [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "dropdown is-right box",
+                        class: { "is-active": _vm.isDropdownActive }
+                      },
+                      [
+                        _c(
+                          "div",
                           {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.kind_id,
-                            expression: "form.kind_id"
-                          }
-                        ],
-                        staticClass: "input",
-                        class: { "is-danger": _vm.form.errors.has("kind_id") },
-                        attrs: { id: "kind_id", type: "text", autofocus: "" },
-                        domProps: { value: _vm.form.kind_id },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                            staticClass: "dropdown-trigger",
+                            on: {
+                              click: function($event) {
+                                _vm.isDropdownActive = !_vm.isDropdownActive
+                              }
                             }
-                            _vm.$set(_vm.form, "kind_id", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _vm.form.errors.has("kind_id")
-                      ? _c("p", {
-                          staticClass: "help is-danger",
-                          domProps: {
-                            textContent: _vm._s(_vm.form.errors.get("name"))
-                          }
-                        })
-                      : _vm._e()
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  "aria-haspopup": "true",
+                                  "aria-controls": "{ 'dropdown-menu'}"
+                                }
+                              },
+                              [
+                                _c("span", { attrs: { id: "selectedOne" } }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      this.selectedKind == null
+                                        ? "Select Kind"
+                                        : this.selectedKind.name
+                                    )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _vm._m(0)
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "dropdown-menu",
+                            attrs: { id: "dropdown-menu", role: "menu" }
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "dropdown-content" },
+                              _vm._l(_vm.kinds, function(kind) {
+                                return _c("div", { key: kind.id }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "dropdown-item ",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.dropOnChange(
+                                            kind.id,
+                                            kind.name
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                       " +
+                                          _vm._s(kind.name) +
+                                          "\n                                                  "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              }),
+                              0
+                            )
+                          ]
+                        )
+                      ]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "field" }, [
@@ -21363,7 +21493,19 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "icon is-small" }, [
+      _c("i", {
+        staticClass: "fa fa-angle-down",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -21589,9 +21731,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Created")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated")]),
         _vm._v(" "),
         _c("th", [_vm._v("Edit")]),
         _vm._v(" "),
@@ -21646,7 +21788,18 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(spell.updated_at))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(spell.kind_id))]),
+            _c("td", [
+              _c("a", {
+                attrs: {
+                  href: "/kind/" + _vm.getKind(spell.kind_id).slug,
+                  name: _vm.getKind(spell.kind_id).name,
+                  description: _vm.getKind(spell.kind_id).description
+                },
+                domProps: {
+                  textContent: _vm._s(_vm.getKind(spell.kind_id).name)
+                }
+              })
+            ]),
             _vm._v(" "),
             _c("td", [
               _c(
@@ -21695,7 +21848,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Updated")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Kind-IDs")]),
+        _c("th", [_vm._v("Kindname")]),
         _vm._v(" "),
         _c("th", [_vm._v("Edit")]),
         _vm._v(" "),
@@ -35013,6 +35166,7 @@ var Form = /*#__PURE__*/function () {
       var _this = this;
 
       this.submitting = true;
+      console.log(this.data());
       return new Promise(function (resolve, reject) {
         axios[requestType](url, _this.data()).then(function (response) {
           _this.onSuccess(response.data);
