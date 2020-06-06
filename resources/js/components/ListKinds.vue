@@ -5,8 +5,8 @@
             <tr class="title is-6">
                 <th>Name</th>
                 <th>Description</th>
-                <th>Description</th>
                 <th>Created</th>
+                <th>Updated</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
