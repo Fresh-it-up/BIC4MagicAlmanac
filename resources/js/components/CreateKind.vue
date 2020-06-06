@@ -69,7 +69,7 @@
             if (this.edit) {
                 this.url = '/kind/' + this.currentKind.slug;
 
-                this.form.kind_id = this.currentKind.id;
+                this.form.id = this.currentKind.id;
                 this.form.name = this.currentKind.name;
                 this.form.description = this.currentKind.description;
 
@@ -90,7 +90,7 @@
                     .then(response => {
                         this.url = '/kind/' + response.slug;
                         console.log(response);
-                        this.form.kind_id = response.kind_id;
+                        this.form.id = response.kind_id;
                         this.form.name = response.name;
                         this.form.description = response.description;
 
