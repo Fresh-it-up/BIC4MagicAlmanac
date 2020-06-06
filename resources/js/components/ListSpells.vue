@@ -16,7 +16,7 @@
             <tr v-for="spell in spells" :key="spell.id">
                 <td>
                     <a :href="'/spell/' + spell.slug"
-                       :name="spell.name" :description="spell.description" :quote="spell.quote" :kind_id="spell.kind_id" :spell_id="spell.id" v-text="spell.name"/>
+                       :name="spell.name" :description="spell.description" v-text="spell.name"/>
                 </td>
                 <td>{{spell.quote}}</td>
                 <td>{{spell.created_at}}</td>

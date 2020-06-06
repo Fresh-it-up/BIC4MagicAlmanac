@@ -95,7 +95,7 @@
             this.edit = this.isEditable;
             if (this.edit) {
                 this.url = '/spell/' + this.currentSpell.slug;
-
+                
                 this.form.spell_id = this.currentSpell.id;
                 this.form.name = this.currentSpell.name;
                 this.form.kind_id = this.currentSpell.kind_id;
@@ -119,6 +119,7 @@
                         .then(response => {
                             this.url = '/spell/' + response.slug;
                             console.log(response);
+
                             this.form.spell_id = response.spell_id;
                             this.form.name = response.name;
                             this.form.kind_id = response.kind_id;

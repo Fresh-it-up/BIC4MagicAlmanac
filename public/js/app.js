@@ -21634,10 +21634,7 @@ var render = function() {
                 attrs: {
                   href: "/spell/" + spell.slug,
                   name: spell.name,
-                  description: spell.description,
-                  quote: spell.quote,
-                  kind_id: spell.kind_id,
-                  spell_id: spell.id
+                  description: spell.description
                 },
                 domProps: { textContent: _vm._s(spell.name) }
               })
