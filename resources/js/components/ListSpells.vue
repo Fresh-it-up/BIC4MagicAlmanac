@@ -58,7 +58,11 @@
           }
         },
         created() {
-          this.fetchKinds();
+            console.log("Length = " + this.spells.length);
+            if (this.spells.length > 0) {
+                this.fetchKinds();
+            }
+
         },
         methods: {
             deleteSpell(spell) {

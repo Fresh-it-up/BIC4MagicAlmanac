@@ -32,6 +32,8 @@ Vue.component('index-spells', require('./components/Spells.vue').default);
 Vue.component('create-spell', require('./components/CreateSpell.vue').default);
 Vue.component('list-spells', require('./components/ListSpells.vue').default);
 Vue.component('spell', require('./components/Spell.vue').default);
+Vue.component('search', require('./components/Search.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
