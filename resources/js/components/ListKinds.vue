@@ -5,6 +5,7 @@
             <tr class="title is-6">
                 <th>Name</th>
                 <th>Description</th>
+                <th>SpellsAmount</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Edit</th>
@@ -14,10 +15,10 @@
             <tbody>
             <tr v-for="kind in kinds" :key="kind.id">
                 <td>
-                    <a :href="'/kind/' + kind.slug"
-                       :name="kind.name" :description="kind.description" v-text="kind.name"/>
+                    <a :href="'/kind/' + kind.slug" v-text="kind.name"/>
                 </td>
                 <td>{{kind.description}}</td>
+                <td>{{kind.spells.length}}</td>
                 <td>{{kind.created_at}}</td>
                 <td>{{kind.updated_at}}</td>
                 <td>
@@ -50,6 +51,7 @@
                 if(confirm('Are you sure?')){
                     console.log('deleting ' + kind.slug);
                     form.delete(`/kind/${kind.slug}`);
+                    window.location.href = '/kind';
                 }
             }
         }

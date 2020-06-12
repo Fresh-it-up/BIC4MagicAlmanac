@@ -27,7 +27,11 @@
             oneKind: {
                 required: true
             },
+            spells: []
         },
+        created() {
+            console.log(this.spells);
+        }
     }
 </script>
 

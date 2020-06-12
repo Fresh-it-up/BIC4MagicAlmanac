@@ -13,18 +13,14 @@
 </template>
 
 <script>
-    import ListKinds from "./ListKinds";
     let form = new Form({
         'name': '',
-        'description': ''
+        'description': '',
     });
     export default {
         name: "Kinds",
-        comments: {
-            ListKinds
-        },
         data() {
-            return{
+            return {
                 hasKinds: function () {
                     return !!this.kinds.length;
                 },
