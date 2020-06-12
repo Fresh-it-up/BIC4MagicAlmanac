@@ -14,12 +14,8 @@
 
 <script>
     import ListSpells from "./ListSpells";
-/*    let form = new Form({
-        'name': '',
-        'description': ''
-    });*/
     let form = new Form({
-
+        'q': 'test',
     });
     export default {
         name: "Spells",
@@ -32,37 +28,21 @@
                     return !!this.spells.length;
                 },
                 spells: [],
-
                 form: form,
-
                 }
             },
         created() {
-            console.log("Before post");
-            this.fetchSpells("/search/spell?q=Spell3");
-            //this.postSpells("/search/spell?q=Spell3");
+            this.postSpells("/search/spell");
         },
         methods: {
-            fetchSpells(uri){
-                uri = uri || '/search/spell?q=Spell3'
-                console.log("fetching " + uri);
-                fetch(uri)
-                    .then(res => {
-                        console.log("SearchResponse: " + res);
-                        this.spells = res;
-                    })
-                    .catch(err => console.log(err));
-            },
-            postSpells: function (uri) {
-                console.log("Entering Post");
-
+            postSpells(uri) {
                 this.form.post(uri)
                     .then(response => {
-                        console.log(response[0].name);
-
+                        console.log(response);
+                        this.spells = response;
 
                     })
-            .catch(err => console.log(err));
+                    .catch(err => console.log(err));
             }
         }
     }
