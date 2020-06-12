@@ -20,7 +20,7 @@
     });
     export default {
         name: "Spells",
-        comments: {
+        components: {
             ListSpells
         },
         data() {

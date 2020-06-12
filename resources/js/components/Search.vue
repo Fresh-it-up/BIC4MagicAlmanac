@@ -1,6 +1,15 @@
 <template>
     <div class="container">
         <h1>Spells</h1>
+            <div class="field" >
+                <label class="label" for="q">Suche</label>
+                <div class="control">
+                <input id="q"
+                    v-model="form.q"
+                    class="input"
+                    type="text" @change="postSpells()">
+                </div>
+            </div>
         <div class="columns is-multiline">
             <div class="column is-three-fifths is-offset-one-fifth">
                 <div class="box custom-box" v-if="this.hasSpells">
@@ -15,11 +24,11 @@
 <script>
     import ListSpells from "./ListSpells";
     let form = new Form({
-        'q': 'test',
+        'q': ''
     });
     export default {
-        name: "Spells",
-        comments: {
+        name: "Search",
+        components: {
             ListSpells
         },
         data() {
@@ -28,15 +37,16 @@
                     return !!this.spells.length;
                 },
                 spells: [],
-                form: form,
+                form : form
                 }
             },
         created() {
-            this.postSpells("/search/spell");
+            this.postSpells();
         },
         methods: {
-            postSpells(uri) {
-                this.form.post(uri)
+            postSpells() {
+                console.log("q " + this.form.q);
+                form.post("/search/spell")
                     .then(response => {
                         console.log(response);
                         this.spells = response;
