@@ -37,14 +37,6 @@
 </template>
 
 <script>
-
-
-    let form = new Form({
-        'name': '',
-        'quote': '',
-        'kind_id': '',
-        'description': ''
-    });
     export default {
         name: "ListSpells",
         props: {
@@ -54,21 +46,18 @@
         },
         data() {
           return {
-            kinds:[]
+              kinds:[],
           }
         },
         created() {
-            console.log("Length = " + this.spells.length);
-            if (this.spells.length > 0) {
-                this.fetchKinds();
-            }
-
+            this.fetchKinds();
         },
         methods: {
             deleteSpell(spell) {
                 spell = spell || this.spell;
                 if(confirm('Are you sure?')){
                     console.log('deleting ' + spell.slug);
+                    let form = new Form();
                     form.delete(`/spell/${spell.slug}`);
                     window.location.href = '/spell';
                 }
