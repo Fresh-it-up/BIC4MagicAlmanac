@@ -2283,7 +2283,11 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     oneKind: {
       required: true
-    }
+    },
+    spells: []
+  },
+  created: function created() {
+    console.log(this.spells);
   }
 });
 
@@ -2298,7 +2302,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ListKinds__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListKinds */ "./resources/js/components/ListKinds.vue");
 //
 //
 //
@@ -2313,16 +2316,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 var form = new Form({
   'name': '',
   'description': ''
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Kinds",
-  comments: {
-    ListKinds: _ListKinds__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   data: function data() {
     return {
       hasKinds: function hasKinds() {
@@ -2397,6 +2396,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var form = new Form({
   'name': '',
   'description': ''
@@ -2415,6 +2415,7 @@ var form = new Form({
       if (confirm('Are you sure?')) {
         console.log('deleting ' + kind.slug);
         form["delete"]("/kind/".concat(kind.slug));
+        window.location.href = '/kind';
       }
     }
   }
@@ -2767,7 +2768,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.h1[data-v-bced714a]{\n    font-weight: bold;\n    margin-bottom: 25px;\n}\n", ""]);
+exports.push([module.i, "\n.h1[data-v-bced714a]{\r\n    font-weight: bold;\r\n    margin-bottom: 25px;\n}\r\n", ""]);
 
 // exports
 
@@ -2805,7 +2806,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd[data-v-00585b06], th[data-v-00585b06] {\n    padding: 6px;\n    border: 1px solid #ccc;\n    text-align: left;\n}\n", ""]);
+exports.push([module.i, "\ntd[data-v-00585b06], th[data-v-00585b06] {\r\n    padding: 6px;\r\n    border: 1px solid #ccc;\r\n    text-align: left;\n}\r\n", ""]);
 
 // exports
 
@@ -21752,16 +21753,14 @@ var render = function() {
           return _c("tr", { key: kind.id }, [
             _c("td", [
               _c("a", {
-                attrs: {
-                  href: "/kind/" + kind.slug,
-                  name: kind.name,
-                  description: kind.description
-                },
+                attrs: { href: "/kind/" + kind.slug },
                 domProps: { textContent: _vm._s(kind.name) }
               })
             ]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(kind.description))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(kind.spells.length))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(kind.created_at))]),
             _vm._v(" "),
@@ -21809,6 +21808,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("SpellsAmount")]),
         _vm._v(" "),
         _c("th", [_vm._v("Created")]),
         _vm._v(" "),
@@ -35444,8 +35445,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/weltbene/Dokumente/PhpstormProjects/BIC4MagicAlmanac/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/weltbene/Dokumente/PhpstormProjects/BIC4MagicAlmanac/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\flori\PhpstormProjects\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\flori\PhpstormProjects\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
