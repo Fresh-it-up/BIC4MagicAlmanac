@@ -5,7 +5,7 @@
             <tr class="title is-6">
                 <th>Name</th>
                 <th>Description</th>
-                <th>SpellsAmount</th>
+                <th id="spell_amount">SpellsAmount</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Edit</th>
@@ -59,6 +59,9 @@
 </script>
 
 <style scoped>
+    #spell_amount{
+        width: 175px;
+    }
 td, th {
     padding: 6px;
     border: 1px solid #ccc;

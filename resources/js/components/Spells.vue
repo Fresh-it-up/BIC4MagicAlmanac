@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Spells</h1>
         <div class="columns is-multiline">
-            <div class="column is-three-fifths is-offset-one-fifth">
+            <div class="column is-10 is-offset-one-second">
                 <div class="box custom-box" v-if="this.hasSpells">
                     <list-spells :spells="spells"></list-spells>
                 </div>

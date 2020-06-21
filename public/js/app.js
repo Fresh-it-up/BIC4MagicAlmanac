@@ -2470,12 +2470,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var form = new Form({
-  'name': '',
-  'quote': '',
-  'kind_id': '',
-  'description': ''
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ListSpells",
   props: {
@@ -2489,11 +2483,7 @@ var form = new Form({
     };
   },
   created: function created() {
-    console.log("Length = " + this.spells.length);
-
-    if (this.spells.length > 0) {
-      this.fetchKinds();
-    }
+    this.fetchKinds();
   },
   methods: {
     deleteSpell: function deleteSpell(spell) {
@@ -2501,6 +2491,7 @@ var form = new Form({
 
       if (confirm('Are you sure?')) {
         console.log('deleting ' + spell.slug);
+        var form = new Form();
         form["delete"]("/spell/".concat(spell.slug));
         window.location.href = '/spell';
       }
@@ -2555,16 +2546,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-/*    let form = new Form({
-        'name': '',
-        'description': ''
-    });*/
-
-var form = new Form({});
+var form = new Form({
+  'q': ''
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Spells",
-  comments: {
+  name: "Search",
+  components: {
     ListSpells: _ListSpells__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
@@ -2577,26 +2574,16 @@ var form = new Form({});
     };
   },
   created: function created() {
-    console.log("Before post");
-    this.fetchSpells("/search/spell?q=Spell3"); //this.postSpells("/search/spell?q=Spell3");
+    this.postSpells();
   },
   methods: {
-    fetchSpells: function fetchSpells(uri) {
+    postSpells: function postSpells() {
       var _this = this;
 
-      uri = uri || '/search/spell?q=Spell3';
-      console.log("fetching " + uri);
-      fetch(uri).then(function (res) {
-        console.log("SearchResponse: " + res);
-        _this.spells = res;
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    },
-    postSpells: function postSpells(uri) {
-      console.log("Entering Post");
-      this.form.post(uri).then(function (response) {
-        console.log(response[0].name);
+      console.log("q " + this.form.q);
+      form.post("/search/spell").then(function (response) {
+        console.log(response);
+        _this.spells = response;
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2679,7 +2666,7 @@ var form = new Form({
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Spells",
-  comments: {
+  components: {
     ListSpells: _ListSpells__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
@@ -2806,7 +2793,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd[data-v-00585b06], th[data-v-00585b06] {\r\n    padding: 6px;\r\n    border: 1px solid #ccc;\r\n    text-align: left;\n}\r\n", ""]);
+exports.push([module.i, "\n#spell_amount[data-v-00585b06]{\n        width: 175px;\n}\ntd[data-v-00585b06], th[data-v-00585b06] {\n    padding: 6px;\n    border: 1px solid #ccc;\n    text-align: left;\n}\n", ""]);
 
 // exports
 
@@ -2825,7 +2812,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntd[data-v-9a42da98], th[data-v-9a42da98] {\n    padding: 6px;\n    border: 1px solid #ccc;\n    text-align: left;\n}\n", ""]);
+exports.push([module.i, "\n.custom-box[data-v-9a42da98]{\n}\ntd[data-v-9a42da98], th[data-v-9a42da98] {\n    padding: 6px;\n    border: 1px solid #ccc;\n    text-align: left;\n}\n", ""]);
 
 // exports
 
@@ -21706,7 +21693,7 @@ var render = function() {
     _c("h1", [_vm._v("Kinds")]),
     _vm._v(" "),
     _c("div", { staticClass: "columns is-multiline" }, [
-      _c("div", { staticClass: "column is-three-fifths is-offset-one-fifth" }, [
+      _c("div", { staticClass: "column is-25 is-offset-one-second" }, [
         this.hasKinds
           ? _c(
               "div",
@@ -21809,7 +21796,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("SpellsAmount")]),
+        _c("th", { attrs: { id: "spell_amount" } }, [_vm._v("SpellsAmount")]),
         _vm._v(" "),
         _c("th", [_vm._v("Created")]),
         _vm._v(" "),
@@ -21843,7 +21830,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "table-container is-fullwidth" }, [
+  return _c("div", { staticClass: "table-container has-text-centered" }, [
     _c("table", { staticClass: "table is-fullwidth is-hoverable" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -21961,6 +21948,39 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("h1", [_vm._v("Spells")]),
     _vm._v(" "),
+    _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label", attrs: { for: "q" } }, [
+        _vm._v("Suche")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.q,
+              expression: "form.q"
+            }
+          ],
+          staticClass: "input",
+          attrs: { id: "q", type: "text" },
+          domProps: { value: _vm.form.q },
+          on: {
+            change: function($event) {
+              return _vm.postSpells()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "q", $event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "columns is-multiline" }, [
       _c("div", { staticClass: "column is-three-fifths is-offset-one-fifth" }, [
         this.hasSpells
@@ -22056,7 +22076,7 @@ var render = function() {
     _c("h1", [_vm._v("Spells")]),
     _vm._v(" "),
     _c("div", { staticClass: "columns is-multiline" }, [
-      _c("div", { staticClass: "column is-three-fifths is-offset-one-fifth" }, [
+      _c("div", { staticClass: "column is-10 is-offset-one-second" }, [
         this.hasSpells
           ? _c(
               "div",

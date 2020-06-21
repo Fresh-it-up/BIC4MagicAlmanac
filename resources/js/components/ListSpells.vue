@@ -1,5 +1,5 @@
 <template>
-    <div class="table-container is-fullwidth">
+    <div class="table-container has-text-centered">
         <table class="table is-fullwidth is-hoverable">
             <thead>
             <tr class="title is-6">
@@ -86,6 +86,9 @@
 </script>
 
 <style scoped>
+    .custom-box{
+
+    }
     td, th {
         padding: 6px;
         border: 1px solid #ccc;
