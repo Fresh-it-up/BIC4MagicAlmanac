@@ -2755,7 +2755,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.h1[data-v-bced714a]{\r\n    font-weight: bold;\r\n    margin-bottom: 25px;\n}\r\n", ""]);
+exports.push([module.i, "\n.h1[data-v-bced714a]{\n    font-weight: bold;\n    margin-bottom: 25px;\n}\n", ""]);
 
 // exports
 
@@ -35465,8 +35465,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\flori\PhpstormProjects\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\flori\PhpstormProjects\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/ajr/PhpstormProjects/BIC4MagicAlmanac/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/ajr/PhpstormProjects/BIC4MagicAlmanac/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
