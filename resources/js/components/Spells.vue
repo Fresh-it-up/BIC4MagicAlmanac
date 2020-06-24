@@ -23,30 +23,18 @@
         components: {
             ListSpells
         },
+        props: {
+            spells: {
+                required: true
+            }
+        },
         data() {
             return{
                 hasSpells: function () {
                     return !!this.spells.length;
                 },
-                spells: [],
             }
         },
-        created() {
-            this.fetchSpells("/list/spell");
-        },
-        methods: {
-            fetchSpells(uri){
-                uri = uri || '/list/spell'
-                console.log("fetching " + uri);
-                fetch(uri)
-                    .then(res => res.json())
-                    .then(res => {
-                        console.log("response: " + res);
-                        this.spells = res;
-                    })
-                    .catch(err => console.log(err));
-            },
-        }
     }
 </script>
 

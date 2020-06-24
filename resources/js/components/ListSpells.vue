@@ -22,7 +22,7 @@
                 <td>{{spell.created_at}}</td>
                 <td>{{spell.updated_at}}</td>
                 <td>
-                   <a :href="'/kind/' + getKind(spell.kind_id).slug" :name="getKind(spell.kind_id).name" :description="getKind(spell.kind_id).description" v-text="getKind(spell.kind_id).name"/>
+                   <a :href="kinds.length > 0 ? '/kind/' + getKind(spell.kind_id).slug : '#'" :name="getKind(spell.kind_id).name" :description="getKind(spell.kind_id).description" v-text="kinds.length > 0 ? getKind(spell.kind_id).name : 'loading'"/>
                 </td>
                 <td>
                     <a :href="'/spell/' + spell.slug + '/edit'" class="button is-info is-outlined is-small">Edit</a>
@@ -62,10 +62,10 @@
                     window.location.href = '/spell';
                 }
             },
-            fetchKinds(uri){
-            uri = uri || '/list/kind'
-            console.log("fetching " + uri);
-            fetch(uri)
+            fetchKinds(uri) {
+                uri = uri || '/list/kind'
+                console.log("fetching " + uri);
+                fetch(uri)
                 .then(res => res.json())
                 .then(res => {
                     console.log("response: " + res);
@@ -73,7 +73,7 @@
                 })
                 .catch(err => console.log(err));
             },
-            getKind(kindID){
+            getKind(kindID) {
                 if(this.kinds.length <= 0)
                     return kindID;
                 let knd = this.kinds.filter(kind =>{
