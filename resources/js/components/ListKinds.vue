@@ -5,7 +5,7 @@
             <tr class="title is-6">
                 <th>Name</th>
                 <th>Description</th>
-                <th id="spell_amount">SpellsAmount</th>
+                <th id="spell_amount">Amount</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Edit</th>
