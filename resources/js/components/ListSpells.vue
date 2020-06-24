@@ -19,8 +19,8 @@
                        :name="spell.name" :description="spell.description" v-text="spell.name"/>
                 </td>
                 <td>{{spell.quote}}</td>
-                <td>{{spell.created_at}}</td>
-                <td>{{spell.updated_at}}</td>
+                <td>{{spell.created_at | formatDate}}</td>
+                <td>{{spell.updated_at | formatDate}}</td>
                 <td>
                    <a :href="kinds.length > 0 ? '/kind/' + getKind(spell.kind_id).slug : '#'" :name="getKind(spell.kind_id).name" :description="getKind(spell.kind_id).description" v-text="kinds.length > 0 ? getKind(spell.kind_id).name : 'loading'"/>
                 </td>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+    import moment from "moment";
+
     export default {
         name: "ListSpells",
         props: {
@@ -81,6 +83,15 @@
                 });
                 return knd[0];
             },
+        },
+        filters: {
+            formatDate: function (value) {
+                if (value) {
+                    console.log("format Date " + value)
+                    return moment(String(value)).format('DD.MM.YYYY hh:mm')
+                }
+
+            }
         }
     }
 </script>
