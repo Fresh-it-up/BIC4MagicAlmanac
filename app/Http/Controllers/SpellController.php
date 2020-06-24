@@ -113,7 +113,9 @@ class SpellController extends Controller
      */
     public function search()
     {
-        return view('spell.search');
+        $spells = Spell::all()->load('kind');
+
+        return view('spell.search', compact('spells'));
     }
 
     /**

@@ -45,9 +45,9 @@
                                         </a>
                                     </div>
                                     <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                        <div class="dropdown-content">
+                                        <div class="dropdown-content" ref="dropdownContent">
                                             <div v-for="kind in kinds" :key="kind.id">
-                                                      <a href="#" class="dropdown-item " @click="dropOnChange(kind.id, kind.name)">
+                                                      <a href="#" class="dropdown-item " @click="dropDownOnChange(kind.id, kind.name)">
                                                            {{kind.name}}
                                                       </a>
                                              </div>
@@ -107,6 +107,7 @@
         },
         created() {
             this.edit = this.isEditable;
+            
             this.fetchKinds();
 
             console.log('Current URl: ' + this.url);
@@ -146,11 +147,8 @@
                     window.location.href = '/spell';
                 }
             },
-            dropOnChange(kindID, kindName){
-                console.log("Incoming: " + kindID);
-                console.log("Form: " + this.form.kind_id);
+            dropDownOnChange(kindID, kindName) {
                 this.form.kind_id = kindID;
-                console.log("Form AFTER: " + this.form.kind_id);
                 document.getElementById("selectedOne").innerText = kindName;
             },
             fetchKinds(uri){
