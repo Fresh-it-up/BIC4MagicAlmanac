@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <h1>Spells</h1>
             <div class="field" >
                 <label class="label" for="q">Suche</label>
                 <div class="control">
@@ -31,6 +30,11 @@
         components: {
             ListSpells
         },
+        props: {
+            incSpells: {
+                required: true
+            }
+        },
         data() {
             return{
                 hasSpells: function () {
@@ -38,21 +42,21 @@
                 },
                 spells: [],
                 form : form
-                }
-            },
+            }
+        },
         created() {
-            this.postSpells();
+            this.spells = this.incSpells;
         },
         methods: {
             postSpells() {
                 console.log("q " + this.form.q);
                 form.post("/search/spell")
-                    .then(response => {
-                        console.log(response);
-                        this.spells = response;
+                .then(response => {
+                    console.log(response);
+                    this.spells = response;
 
-                    })
-                    .catch(err => console.log(err));
+                })
+                .catch(err => console.log(err));
             }
         }
     }

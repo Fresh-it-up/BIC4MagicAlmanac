@@ -5,7 +5,7 @@
             <tr class="title is-6">
                 <th>Name</th>
                 <th>Description</th>
-                <th id="spell_amount">SpellsAmount</th>
+                <th id="spell_amount">Amount</th>
                 <th>Created</th>
                 <th>Updated</th>
                 <th>Edit</th>
@@ -19,8 +19,8 @@
                 </td>
                 <td>{{kind.description}}</td>
                 <td>{{kind.spells.length}}</td>
-                <td>{{kind.created_at}}</td>
-                <td>{{kind.updated_at}}</td>
+                <td>{{kind.created_at | formatDate}}</td>
+                <td>{{kind.updated_at | formatDate}}</td>
                 <td>
                     <a :href="'/kind/' + kind.slug + '/edit'" class="button is-info is-outlined is-small">Edit</a>
                 </td>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+    import moment from 'moment';
     let form = new Form({
         'name': '',
         'description': ''
@@ -53,6 +54,16 @@
                     form.delete(`/kind/${kind.slug}`);
                     window.location.href = '/kind';
                 }
+            }
+        },
+
+        filters: {
+            formatDate: function (value) {
+                if (value) {
+                    console.log("format Date " + value)
+                    return moment(String(value)).format('DD.MM.YYYY hh:mm')
+                }
+
             }
         }
     }

@@ -19,30 +19,18 @@
     });
     export default {
         name: "Kinds",
+        props: {
+            kinds: {
+                required: true
+            }
+        },
         data() {
             return {
                 hasKinds: function () {
                     return !!this.kinds.length;
                 },
-                kinds: [],
             }
         },
-        created() {
-            this.fetchKinds("/list/kind");
-        },
-        methods: {
-            fetchKinds(uri){
-                uri = uri || '/list/kind'
-                console.log("fetching " + uri);
-                fetch(uri)
-                .then(res => res.json())
-                .then(res => {
-                    console.log("response: " + res);
-                    this.kinds = res;
-                })
-                .catch(err => console.log(err));
-            },
-        }
     }
 </script>
 

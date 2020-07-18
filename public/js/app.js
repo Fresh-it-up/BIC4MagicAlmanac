@@ -2322,32 +2322,17 @@ var form = new Form({
 });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Kinds",
+  props: {
+    kinds: {
+      required: true
+    }
+  },
   data: function data() {
     return {
       hasKinds: function hasKinds() {
         return !!this.kinds.length;
-      },
-      kinds: []
+      }
     };
-  },
-  created: function created() {
-    this.fetchKinds("/list/kind");
-  },
-  methods: {
-    fetchKinds: function fetchKinds(uri) {
-      var _this = this;
-
-      uri = uri || '/list/kind';
-      console.log("fetching " + uri);
-      fetch(uri).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        console.log("response: " + res);
-        _this.kinds = res;
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    }
   }
 });
 
@@ -2669,32 +2654,17 @@ var form = new Form({
   components: {
     ListSpells: _ListSpells__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  props: {
+    spells: {
+      required: true
+    }
+  },
   data: function data() {
     return {
       hasSpells: function hasSpells() {
         return !!this.spells.length;
-      },
-      spells: []
+      }
     };
-  },
-  created: function created() {
-    this.fetchSpells("/list/spell");
-  },
-  methods: {
-    fetchSpells: function fetchSpells(uri) {
-      var _this = this;
-
-      uri = uri || '/list/spell';
-      console.log("fetching " + uri);
-      fetch(uri).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        console.log("response: " + res);
-        _this.spells = res;
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    }
   }
 });
 
@@ -2755,7 +2725,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.h1[data-v-bced714a]{\r\n    font-weight: bold;\r\n    margin-bottom: 25px;\n}\r\n", ""]);
+exports.push([module.i, "\n.h1[data-v-bced714a]{\n    font-weight: bold;\n    margin-bottom: 25px;\n}\n", ""]);
 
 // exports
 
@@ -21858,12 +21828,19 @@ var render = function() {
             _c("td", [
               _c("a", {
                 attrs: {
-                  href: "/kind/" + _vm.getKind(spell.kind_id).slug,
+                  href:
+                    _vm.kinds.length > 0
+                      ? "/kind/" + _vm.getKind(spell.kind_id).slug
+                      : "#",
                   name: _vm.getKind(spell.kind_id).name,
                   description: _vm.getKind(spell.kind_id).description
                 },
                 domProps: {
-                  textContent: _vm._s(_vm.getKind(spell.kind_id).name)
+                  textContent: _vm._s(
+                    _vm.kinds.length > 0
+                      ? _vm.getKind(spell.kind_id).name
+                      : "loading"
+                  )
                 }
               })
             ]),
@@ -35465,8 +35442,8 @@ var Form = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\flori\PhpstormProjects\BIC4MagicAlmanac\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\flori\PhpstormProjects\BIC4MagicAlmanac\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/ajr/PhpstormProjects/BIC4MagicAlmanac/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/ajr/PhpstormProjects/BIC4MagicAlmanac/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
